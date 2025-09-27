@@ -5,6 +5,7 @@
 constexpr int   SCREEN_WIDTH  = 1200,
                 SCREEN_HEIGHT = 800,
                 FPS           = 60;
+
 // Simple planet rotation settings
 float speed = 2.0f;      // How fast it spins
 constexpr float radius = 100.0f;
@@ -19,13 +20,13 @@ float rockSpeed = 0.3f;
 Vector2 rockPosition = { 0.0f, 0.0f };
 float rockScale = 1.5f;
 
-// Star variables (heartbeat + waving)
+// Star variables
 float starTime = 0.0f;
 float starSpeed = 2.0f;
 Vector2 starPosition = { 0.0f, 0.0f };
 float starScale = 1.0f;
 
-// Heartbeat variables
+// heartbeat
 float gPulseTime = 0.0f;
 constexpr float PULSE_INCREMENT = 0.1f;
 constexpr float BASE_SIZE = 1.0f;
@@ -76,20 +77,20 @@ void update()
     float deltaTime = ticks - gPreviousTicks;
     gPreviousTicks = ticks;
     
-    // Update day/night cycle
+    // Update day/night cycle, 2 PI = full cycle
     dayNightCycle += cycleSpeed * deltaTime;
     if (dayNightCycle > 2 * PI) dayNightCycle = 0.0f;
     
     // Update rock movement 
     rockTime += rockSpeed * deltaTime;
     if (rockTime > 1.0f) rockTime = 0.0f; // Reset when reaches bottom-left
-    // Linear movement 
+    // Linear movement like falling
     rockPosition.x = SCREEN_WIDTH - rockTime * SCREEN_WIDTH;
     rockPosition.y = rockTime * SCREEN_HEIGHT; 
     
     rockScale = 1.0f - rockTime * 0.9; 
     
-    // Update star movement (heartbeat + waving)
+    // Update star movement (heartbeat + waving in heart shape)
     starTime += starSpeed * deltaTime;
     if (starTime > 2 * PI) starTime = 0.0f; // Reset cycle
     
@@ -99,7 +100,7 @@ void update()
     // https://mathworld.wolfram.com/HeartCurve.html found the heart function here
     float heartX = 16 * pow(sin(starTime), 3);
     float heartY = -(13 * cos(starTime) - 5 * cos(2*starTime) - 2 * cos(3*starTime) - cos(4*starTime)); 
-    // Scale  to make heart bigger
+    // Scale to make heart bigger
     float heartScale = 8.0f; 
     starPosition.x = (SCREEN_WIDTH - 200) + heartX * heartScale;
     starPosition.y = (SCREEN_HEIGHT - 200) + heartY * heartScale;
@@ -141,7 +142,7 @@ void render()
     Vector2 rockOrigin = { 75 * rockScale, 75 * rockScale };
     DrawTexturePro(rockTexture, rockSource, rockDest, rockOrigin, 0, WHITE);
 
-    // Draw the star with heartbeat and waving effects
+    // Draw the star with heartbeat 
     Rectangle starSource = { 0, 0, (float)starTexture.width, (float)starTexture.height };
     Rectangle starDest = { 
         starPosition.x, 
