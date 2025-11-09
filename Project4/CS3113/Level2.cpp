@@ -42,10 +42,10 @@ void Level2::initialise()
 
    // Player animation atlas (purple character)
    std::map<Direction, std::vector<int>> playerAnimationAtlas = {
-      {DOWN,  { 33 }},      // idle
-      {LEFT,  { 9, 17 }},   // walk
-      {UP,    { 10, 2 }},   // climb
-      {RIGHT, { 9, 17 }},   // walk
+      {DOWN,  { 33 }},      
+      {LEFT,  { 9, 17 }},   
+      {UP,    { 10, 2 }},  
+      {RIGHT, { 9, 17 }},   
    };
    
    float characterScale = 128.0f;
@@ -72,10 +72,10 @@ void Level2::initialise()
 
    // Enemy animation atlas
    std::map<Direction, std::vector<int>> enemyAnimationAtlas = {
-      {DOWN,  { 51 }},      // idle
-      {LEFT,  { 27, 35 }},  // walk
-      {UP,    { 28, 20 }},  // climb
-      {RIGHT, { 27, 35 }},  // walk
+      {DOWN,  { 51 }},      
+      {LEFT,  { 27, 35 }}, 
+      {UP,    { 28, 20 }},  
+      {RIGHT, { 27, 35 }}, 
    };
 
    float enemyScale = 128.0f;

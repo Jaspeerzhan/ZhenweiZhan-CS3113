@@ -1,11 +1,12 @@
 /**
- * Space Travel - Platformer Game
- * Author: Zhenwwei Zhan
- * Assignment: Rise of the AI
- * Date due: 2025-11-08, 11:59pm
- * 
- * Main game loop and scene management
- */
+* Author: Zhenwwei Zhan
+* Assignment: Rise of the AI
+* Date due: 2025-11-08, 11:59pm
+* I pledge that I have completed this assignment without
+* collaborating with anyone else, in conformance with the
+* NYU School of Engineering Policies and Procedures on
+* Academic Misconduct.
+**/
 
 #include "CS3113/MenuScene.h"
 #include "CS3113/Level1.h"
@@ -49,20 +50,16 @@ void switchToScene(Scene *scene)
 {   
     if (scene == nullptr)
     {
-        TraceLog(LOG_ERROR, "switchToScene: scene is nullptr!");
         return;
     }
     
     if (gCurrentScene == scene)
     {
-        TraceLog(LOG_WARNING, "switchToScene: Already in this scene, skipping...");
         return;
     }
     
-    TraceLog(LOG_INFO, "switchToScene: Switching scene...");
     gCurrentScene = scene;
     gCurrentScene->initialise();
-    TraceLog(LOG_INFO, "switchToScene: Scene initialised successfully");
 }
 
 void initialise()
@@ -91,15 +88,10 @@ void processInput()
     {
         if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_KP_ENTER) || IsKeyPressed(KEY_SPACE))
         {
-            TraceLog(LOG_INFO, "Enter key pressed, switching to Level1...");
             gPlayerLives = 3;
             if (gLevel1 != nullptr)
             {
                 switchToScene(gLevel1);
-            }
-            else
-            {
-                TraceLog(LOG_ERROR, "gLevel1 is nullptr!");
             }
             return;
         }

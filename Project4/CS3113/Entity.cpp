@@ -224,34 +224,9 @@ void Entity::AIFollow(Entity *target)
     }
 }
 
-void Entity::AIPatrol()
-{
-    // Patrol between left and right bounds
-    if (mPatrolLeftBound == 0.0f && mPatrolRightBound == 0.0f)
-    {
-        // Initialize patrol bounds if not set
-        mPatrolLeftBound = mPosition.x - 200.0f;
-        mPatrolRightBound = mPosition.x + 200.0f;
-    }
-    
-    // Change direction at boundaries
-    if (mPosition.x >= mPatrolRightBound)
-    {
-        mPatrolDirection = false; // Move left
-    }
-    else if (mPosition.x <= mPatrolLeftBound)
-    {
-        mPatrolDirection = true; // Move right
-    }
-    
-    // Move in current direction
-    if (mPatrolDirection) moveRight();
-    else moveLeft();
-}
-
 void Entity::AIFly(Entity *target)
 {
-    // Fly left and right in the air (similar to PATROLLER but in the air)
+    // Fly left and right in the air
     if (mPatrolLeftBound == 0.0f && mPatrolRightBound == 0.0f)
     {
         // Initialize patrol bounds if not set
@@ -284,10 +259,6 @@ void Entity::AIActivate(Entity *target)
 
     case FOLLOWER:
         AIFollow(target);
-        break;
-    
-    case PATROLLER:
-        AIPatrol();
         break;
     
     case FLYER:
@@ -386,24 +357,4 @@ void Entity::render()
         mAngle, WHITE
     );
 
-    // displayCollider();
-}
-
-void Entity::displayCollider() 
-{
-    // draw the collision box
-    Rectangle colliderBox = {
-        mPosition.x - mColliderDimensions.x / 2.0f,  
-        mPosition.y - mColliderDimensions.y / 2.0f,  
-        mColliderDimensions.x,                        
-        mColliderDimensions.y                        
-    };
-
-    DrawRectangleLines(
-        colliderBox.x,      // Top-left X
-        colliderBox.y,      // Top-left Y
-        colliderBox.width,  // Width
-        colliderBox.height, // Height
-        GREEN               // Color
-    );
 }

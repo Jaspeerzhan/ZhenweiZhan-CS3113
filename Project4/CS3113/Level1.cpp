@@ -9,7 +9,7 @@
  **/
 
 #include "Level1.h"
-
+// used the defined global variable
 extern int gPlayerLives;
 
 Level1::Level1() : Scene { {0.0f}, nullptr } {}
@@ -43,10 +43,10 @@ void Level1::initialise()
 
    // Animation atlas
    std::map<Direction, std::vector<int>> playerAnimationAtlas = {
-      {DOWN,  { 33 }},      // idle
-      {LEFT,  { 9, 17 }},   // walk
-      {UP,    { 10, 2 }},   // climb
-      {RIGHT, { 9, 17 }},   // walk
+      {DOWN,  { 33 }},    
+      {LEFT,  { 9, 17 }},   
+      {UP,    { 10, 2 }},   
+      {RIGHT, { 9, 17 }},   
    };
 
    float characterScale = 128.0f;
@@ -75,10 +75,10 @@ void Level1::initialise()
 
    // Enemy animation atlas
    std::map<Direction, std::vector<int>> enemyAnimationAtlas = {
-      {DOWN,  { 42 }},      // idle
-      {LEFT,  { 18, 26 }},  // walk
-      {UP,    { 19, 11 }},  // climb
-      {RIGHT, { 18, 26 }},  // walk
+      {DOWN,  { 42 }},      
+      {LEFT,  { 18, 26 }},  
+      {UP,    { 19, 11 }},  
+      {RIGHT, { 18, 26 }},  
    };
 
    float enemyScale = 128.0f;

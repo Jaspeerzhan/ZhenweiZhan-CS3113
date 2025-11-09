@@ -3,10 +3,11 @@
 
 #include "Map.h"
 
-enum Direction    { LEFT, UP, RIGHT, DOWN              }; // For walking
+enum Direction    { LEFT, UP, RIGHT, DOWN              }; 
 enum EntityStatus { ACTIVE, INACTIVE                   };
 enum EntityType   { PLAYER, BLOCK, PLATFORM, NPC, NONE };
-enum AIType       { WANDERER, FOLLOWER, PATROLLER, FLYER      };
+// AI types I added a Flyer
+enum AIType       { WANDERER, FOLLOWER, FLYER      };
 enum AIState      { WALKING, IDLE, FOLLOWING           };
 
 class Entity
@@ -67,7 +68,6 @@ private:
     void AIActivate(Entity *target);
     void AIWander();
     void AIFollow(Entity *target);
-    void AIPatrol();
     void AIFly(Entity *target);
     
     float mPatrolLeftBound = 0.0f;
@@ -97,7 +97,6 @@ public:
     void jump()       { mIsJumping = true;  }
     void activate()   { mEntityStatus  = ACTIVE;   }
     void deactivate() { mEntityStatus  = INACTIVE; }
-    void displayCollider();
 
     bool isActive() { return mEntityStatus == ACTIVE ? true : false; }
 
