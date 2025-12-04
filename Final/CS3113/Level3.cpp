@@ -34,7 +34,11 @@ void Level3::initialise()
     for (int r=0; r<LEVEL3_HEIGHT; r++) {
         for (int c=0; c<LEVEL3_WIDTH; c++) {
             int i = r*LEVEL3_WIDTH + c;
-            if (r==0 || r==LEVEL3_HEIGHT-1 || c==0 || c==LEVEL3_WIDTH-1) mLevelData[i]=1;
+            // Skip bricks at Watcher positions
+            if ((r==10 && c==32) || (r==22 && c==32) || (r==6 && c==46)) {
+                mLevelData[i]=2;
+            }
+            else if (r==0 || r==LEVEL3_HEIGHT-1 || c==0 || c==LEVEL3_WIDTH-1) mLevelData[i]=1;
             else if (r%4==0 && c%4==0) mLevelData[i]=1;
             else if (r==16 && c>10 && c<54) mLevelData[i]=1;
             else mLevelData[i]=2;
@@ -63,9 +67,9 @@ void Level3::initialise()
 
     // Watchers (3)
     Vector2 wPos[] = {
-        {mapL + 32.5f*TILE_DIMENSION, mapT + 9.5f*TILE_DIMENSION},  // North
+        {mapL + 32.5f*TILE_DIMENSION, mapT + 10.5f*TILE_DIMENSION},  // North (moved down 0.5 tiles)
         {mapL + 32.5f*TILE_DIMENSION, mapT + 22.5f*TILE_DIMENSION}, // South
-        {mapL + 46.5f*TILE_DIMENSION, mapT + 6.5f*TILE_DIMENSION}   // East/North (Moved to safe open area)
+        {mapL + 46.5f*TILE_DIMENSION, mapT + 6.5f*TILE_DIMENSION}   // East/North
     };
     for (auto& p : wPos) {
         Entity* e = new Entity(p, {scale, scale}, "witcher.png", ATLAS, {10,1}, 

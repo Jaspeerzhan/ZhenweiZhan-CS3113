@@ -13,6 +13,7 @@
 #include "CS3113/Level2.h"
 #include "CS3113/Level3.h"
 #include "CS3113/ShaderProgram.h"
+#include "CS3113/Effects.h"
 
 // Global Constants
 constexpr int SCREEN_WIDTH     = 1000,
@@ -40,6 +41,7 @@ int gPlayerLives = 3;
 ShaderProgram gShader;
 Vector2 gLightPosition = { 0.0f, 0.0f };
 Texture2D gHeartTexture = { 0 };
+Effects *gEffects = nullptr;
 
 // Function Declarations
 void switchToScene(Scene *scene);
@@ -63,6 +65,12 @@ void switchToScene(Scene *scene)
     
     gCurrentScene = scene;
     gCurrentScene->initialise();
+    
+    // Start FADEIN effect when entering a level
+    if (scene == gLevel1 || scene == gLevel2 || scene == gLevel3)
+    {
+        if (gEffects != nullptr) gEffects->start(FADEIN);
+    }
 }
 
 void initialise()
@@ -82,6 +90,9 @@ void initialise()
     gScenes.push_back(gLevel2);
     gScenes.push_back(gLevel3);
     
+    // Initialize Effects
+    gEffects = new Effects(ORIGIN, (float)SCREEN_WIDTH * 1.5f, (float)SCREEN_HEIGHT * 1.5f);
+    
     // Start at Menu
     switchToScene(gMenuScene);
 
@@ -94,7 +105,7 @@ void processInput()
     {
             if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_KP_ENTER) || IsKeyPressed(KEY_SPACE)) {
                 gPlayerLives = 3;
-                if (gLevel1 != nullptr) switchToScene(gLevel1);
+                if (gLevel1 != nullptr) switchToScene(gLevel3);
                 return;
             }
     }
@@ -140,6 +151,14 @@ void update()
         gCurrentScene->update(FIXED_TIMESTEP);
         if (gCurrentScene != gMenuScene && gCurrentScene->getState().player != nullptr)
             gLightPosition = gCurrentScene->getState().player->getPosition();
+        
+        // Update Effects
+        if (gEffects != nullptr)
+        {
+            Vector2 cameraTarget = gCurrentScene->getState().camera.target;
+            gEffects->update(FIXED_TIMESTEP, &cameraTarget);
+        }
+        
         deltaTime -= FIXED_TIMESTEP;
     }
 }
@@ -161,6 +180,9 @@ void render()
         gShader.end();
 
     EndMode2D();
+
+    // Render Effects overlay (before UI)
+    if (gEffects != nullptr) gEffects->render();
 
     // Render UI (unaffected by shader and camera)
     if (gCurrentScene) gCurrentScene->renderUI();
@@ -185,11 +207,13 @@ void shutdown()
     delete gLevel1;
     delete gLevel2;
     delete gLevel3;
+    delete gEffects;
     gMenuScene = nullptr;
     gLevel1 = nullptr;
     gLevel2 = nullptr;
     gLevel3 = nullptr;
     gCurrentScene = nullptr;
+    gEffects = nullptr;
     gShader.unload();
     if (gHeartTexture.id != 0) UnloadTexture(gHeartTexture);
 

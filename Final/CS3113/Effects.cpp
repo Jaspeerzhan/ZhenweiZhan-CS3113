@@ -3,7 +3,7 @@
 Effects::Effects(Vector2 origin, float windowWidth, float windowHeight) : mAlpha{SOLID}, 
                      mEffectSpeed{DEFAULT_SPEED},
                      mOverlayWidth{windowWidth}, 
-                     mOverlayHeight{windowHeight}, mCurrentEffect{NONE},
+                     mOverlayHeight{windowHeight}, mCurrentEffect{NO_EFFECT},
                      mViewOffset{{}}, mOrigin{origin}, 
                      mMaxWindowDimensions{windowWidth, windowHeight}
 {
@@ -35,7 +35,7 @@ void Effects::update(float deltaTime, Vector2 *viewOffset)
             if (mAlpha <= TRANSPARENT)
             {
                 mAlpha = TRANSPARENT;
-                mCurrentEffect = NONE;
+                mCurrentEffect = NO_EFFECT;
             }
 
             break;
@@ -46,7 +46,7 @@ void Effects::update(float deltaTime, Vector2 *viewOffset)
             if (mAlpha >= SOLID)
             {
                 mAlpha = SOLID;
-                mCurrentEffect = NONE;
+                mCurrentEffect = NO_EFFECT;
             }
 
             break;
@@ -60,7 +60,7 @@ void Effects::update(float deltaTime, Vector2 *viewOffset)
             {
                 mOverlayHeight = 0.0f;
                 mOverlayWidth  = 0.0f;
-                mCurrentEffect = NONE;
+                mCurrentEffect = NO_EFFECT;
             }
             break;
 
@@ -73,10 +73,10 @@ void Effects::update(float deltaTime, Vector2 *viewOffset)
             {
                 mOverlayHeight = mMaxWindowDimensions.y;
                 mOverlayWidth  = mMaxWindowDimensions.x;
-                mCurrentEffect = NONE;
+                mCurrentEffect = NO_EFFECT;
             }
 
-        case NONE:
+        case NO_EFFECT:
         default:
             break;
     }
@@ -106,7 +106,7 @@ void Effects::start(EffectType effectType)
             mOverlayWidth  = 0.0f;
             break;
 
-        case NONE:
+        case NO_EFFECT:
         default:
             break;
     }
@@ -123,9 +123,9 @@ void Effects::render()
             drawOverlay();
             break;
 
-        case NONE:
+        case NO_EFFECT:
     
-    default:
-        break;
+        default:
+            break;
     }
 }

@@ -3,7 +3,7 @@
 
 #include "raylib.h"
 
-enum EffectType { NONE, FADEIN, FADEOUT, SHRINK, GROW };
+enum EffectType { NO_EFFECT, FADEIN, FADEOUT, SHRINK, GROW };
 
 class Effects
 {
