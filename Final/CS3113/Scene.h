@@ -19,7 +19,7 @@ struct GameState
     Camera2D camera;
 
     int nextSceneID;
-    int lives = 3;  // 玩家生命值（总共3条命）
+    int lives = 3;  // Player lives (total 3 lives)
 };
 
 class Scene 
