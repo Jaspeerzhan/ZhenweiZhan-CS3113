@@ -105,7 +105,7 @@ void processInput()
     {
             if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_KP_ENTER) || IsKeyPressed(KEY_SPACE)) {
                 gPlayerLives = 3;
-                if (gLevel1 != nullptr) switchToScene(gLevel3);
+                if (gLevel1 != nullptr) switchToScene(gLevel1);
                 return;
             }
     }
@@ -230,7 +230,7 @@ int main(void)
         processInput();
         update();
         
-        int nextID = gCurrentScene->getNextSceneID();
+        int nextID = 3;
         if (nextID > 0 && nextID < (int)gScenes.size())
         {
             switchToScene(gScenes[nextID]);
