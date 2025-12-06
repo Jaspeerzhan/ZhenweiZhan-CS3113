@@ -67,7 +67,7 @@ void Level3::initialise()
 
     // Watchers (3)
     Vector2 wPos[] = {
-        {mapL + 32.5f*TILE_DIMENSION, mapT + 10.5f*TILE_DIMENSION},  // North (moved down 0.5 tiles)
+        {mapL + 32.5f*TILE_DIMENSION, mapT + 10.5f*TILE_DIMENSION},  // North
         {mapL + 32.5f*TILE_DIMENSION, mapT + 22.5f*TILE_DIMENSION}, // South
         {mapL + 46.5f*TILE_DIMENSION, mapT + 6.5f*TILE_DIMENSION}   // East/North
     };

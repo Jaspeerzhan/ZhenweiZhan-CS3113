@@ -31,8 +31,6 @@ private:
     bool mWasAttacking = false; // Track previous frame attack state
     
     // Top-down map using tile.png (4 rows, 1 column)
-    // 0 = empty, 1 = wall, 2 = grass
-    // Map is 48x24, generated in initialise()
     unsigned int mLevelData[LEVEL2_WIDTH * LEVEL2_HEIGHT];
 
 public:

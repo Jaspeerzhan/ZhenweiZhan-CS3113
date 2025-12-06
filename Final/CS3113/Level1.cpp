@@ -47,26 +47,24 @@ void Level1::initialise()
            if (row == 0 || row == LEVEL1_HEIGHT - 1 || col == 0 || col == LEVEL1_WIDTH - 1) {
                mLevelData[index] = 1; // Wall
            }
-           // Inner walls: Four corner rooms with 2-tile wide entrances
-           // Top-Left Room (Horizontal wall at row 9, Vertical at col 12)
-           // Entrance: col 6-7 (bottom), row 4-5 (right)
+           // Top-Left Room 
            else if ((row == 9 && col <= 12 && !(col >= 6 && col <= 7)) || 
                     (col == 12 && row <= 9 && !(row >= 4 && row <= 5))) {
                mLevelData[index] = 1;
            }
-           // Top-Right Room (Horizontal wall at row 9, Vertical at col 35)
+           // Top-Right Room
            // Entrance: col 40-41 (bottom), row 4-5 (left)
            else if ((row == 9 && col >= 35 && col != 42 && !(col >= 40 && col <= 41)) || 
                     (col == 35 && row <= 9 && !(row >= 4 && row <= 5))) {
                mLevelData[index] = 1;
            }
-           // Bottom-Left Room (Horizontal wall at row 16, Vertical at col 12)
+           // Bottom-Left Room
            // Entrance: col 6-7 (top), row 19-20 (right)
            else if ((row == 16 && col <= 12 && !(col >= 6 && col <= 7)) || 
                     (col == 12 && row >= 16 && !(row >= 19 && row <= 20))) {
                mLevelData[index] = 1;
            }
-           // Bottom-Right Room (Horizontal wall at row 16, Vertical at col 35)
+           // Bottom-Right Room
            // Entrance: col 40-41 (top), row 19-20 (left)
            else if ((row == 16 && col >= 35 && col != 42 && !(col >= 40 && col <= 41)) || 
                     (col == 35 && row >= 16 && !(row >= 19 && row <= 20))) {
