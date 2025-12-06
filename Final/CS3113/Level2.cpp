@@ -179,7 +179,7 @@ void Level2::update(float deltaTime)
                Vector2 enemyPos = enemy->getPosition();
                Direction playerDir = mGameState.player->getDirection();
                
-               float attackRange = 42.0f; 
+               float attackRange = 62.0f; 
                bool hit = false;
                
                if (playerDir == UP && enemyPos.y < playerPos.y && enemyPos.y > playerPos.y - attackRange && abs(enemyPos.x - playerPos.x) < 40) hit = true;

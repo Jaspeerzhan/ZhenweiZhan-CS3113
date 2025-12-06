@@ -220,11 +220,11 @@ void Level1::update(float deltaTime)
        if (enemy->isActive()) {
            activeEnemiesCount++;
            
-           // Check player attack (Range + 10)
+           // Check player attack (Range + 20)
            if (mGameState.player != nullptr && mGameState.player->isActive() && mGameState.player->isAttacking()) {
                    float playerRadius = mGameState.player->getColliderDimensions().x / 2.0f;
                    float enemyRadius = enemy->getColliderDimensions().x / 2.0f;
-                   float attackRange = playerRadius + enemyRadius + 10.0f;
+                   float attackRange = playerRadius + enemyRadius + 20.0f;
                    
                    Vector2 playerPos = mGameState.player->getPosition();
                    Vector2 enemyPos = enemy->getPosition();

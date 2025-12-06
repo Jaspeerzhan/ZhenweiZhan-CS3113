@@ -144,7 +144,7 @@ void Level3::update(float deltaTime)
         if (e->isActive() && mGameState.player->isAttacking()) {
             Vector2 p = mGameState.player->getPosition(), ep = e->getPosition();
             Direction d = mGameState.player->getDirection();
-            float range = 42.0f; bool hit = false;
+            float range = 62.0f; bool hit = false;
             if (d==UP && ep.y<p.y && ep.y>p.y-range && abs(ep.x-p.x)<40) hit=true;
             else if (d==DOWN && ep.y>p.y && ep.y<p.y+range && abs(ep.x-p.x)<40) hit=true;
             else if (d==LEFT && ep.x<p.x && ep.x>p.x-range && abs(ep.y-p.y)<40) hit=true;

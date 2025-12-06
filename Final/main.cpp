@@ -230,7 +230,7 @@ int main(void)
         processInput();
         update();
         
-        int nextID = 3;
+        int nextID = gCurrentScene->getNextSceneID();
         if (nextID > 0 && nextID < (int)gScenes.size())
         {
             switchToScene(gScenes[nextID]);
